@@ -38,8 +38,8 @@ window.renderStatistics = function (ctx, names, times) {
 
   var barStep = HISTOGRAM_HEIGHT / getMaxElement(times);
 
-  var drawColumn = function (j) {
-    ctx.fillRect(INDENT_X + (BAR_WIDTH + BAR_GAP) * j, INDENT_Y + 5 + (HISTOGRAM_HEIGHT - times[j] * barStep), BAR_WIDTH, times[j] * barStep);
+  var drawColumn = function (index) {
+    ctx.fillRect(INDENT_X + (BAR_WIDTH + BAR_GAP) * index, INDENT_Y + 5 + (HISTOGRAM_HEIGHT - times[index] * barStep), BAR_WIDTH, times[index] * barStep);
   };
   var fillText = function (text, coordX, coordY) {
     ctx.fillText(text, coordX, coordY);
@@ -52,7 +52,7 @@ window.renderStatistics = function (ctx, names, times) {
   fillText('Список результатов: ', INDENT_X, 60);
 
   for (var i = 0; i < times.length; i++) {
-    ctx.fillText(Math.round(times[i]), INDENT_X + (BAR_WIDTH + BAR_GAP) * i, INDENT_Y + (HISTOGRAM_HEIGHT - times[i] * barStep));
+    fillText(Math.round(times[i]), INDENT_X + (BAR_WIDTH + BAR_GAP) * i, INDENT_Y + (HISTOGRAM_HEIGHT - times[i] * barStep));
     if (names[i] === 'Вы') {
       ctx.fillStyle = USER_BAR_COLOR;
     } else {
@@ -61,6 +61,6 @@ window.renderStatistics = function (ctx, names, times) {
     drawColumn(i);
     ctx.fillStyle = '#000000';
     ctx.globalAlpha = 1;
-    ctx.fillText(names[i], INDENT_X + (BAR_WIDTH + BAR_GAP) * i, INDENT_Y + HISTOGRAM_HEIGHT + LINE_HEIGHT + 10);
+    fillText(names[i], INDENT_X + (BAR_WIDTH + BAR_GAP) * i, INDENT_Y + HISTOGRAM_HEIGHT + LINE_HEIGHT + 10);
   }
 };
